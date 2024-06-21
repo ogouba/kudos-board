@@ -9,24 +9,19 @@ import KudosCard from '../kudoscard'
 
 function PageOne(){
 
-    // console.log("here")
-
     const navigate = useNavigate();
     const [kudoCard, setKudoCard] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const [search, setSearch] = useState(false)
+    const [search, setSearch] = useState(false);
+    const [filter, setfilter] = useState([]);
       
     useEffect(() => {
       fetchkudosCards();
     }, []);
-
-    // const handleClick( ){
-    //     navigate("/PageTwo");
-    // }
        
     const fetchkudosCards =() =>{
-        fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard`)
+        fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard`)
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -42,8 +37,8 @@ function PageOne(){
     }; 
     
     const handleCreateKudoCards = (newKudosBoard) =>{
-      console.log(newKudosBoard)
-        fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard`,
+    //   console.log(newKudosBoard)
+        fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard`,
           {
             method: "POST",
             headers: {
@@ -66,7 +61,7 @@ function PageOne(){
         });
       }
     const handleDeleteKudoCards= async (boardId) =>{
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard/${boardId}`,
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard/${boardId}`,
         {
           method: "DELETE",
           headers: {
@@ -79,11 +74,12 @@ function PageOne(){
         else{
           setKudoCard(kudoCard.filter(kudocard => kudocard.id !== boardId) );
         }
-      console.log("clicked")
+    //   console.log("clicked")
     }
+    // search with input
     const handleSearchKudoCards = async () => {
       // console.log(searchQuery)
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard?search=${searchQuery}`)
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard?search=${searchQuery}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -98,8 +94,23 @@ function PageOne(){
         console.error('Error fetching kudosCard', error);
       });
     }; 
-    
-    
+    // filter buttons 
+    const handleFilterKudoCards =  async () => {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard?search=${filter}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setKudoCard(data) 
+          // console.log(kudoCard)
+        })
+        .catch(error => {
+          console.error('Error fetching kudosCard', error);
+        });
+    }
     
     const cards = kudoCard.map((kudoscard, idx) =>{
       // console.log(kudoscard)
@@ -141,8 +152,7 @@ function PageOne(){
               <li key={card.id}>{card.title}</li>
             ))}
           </ul>
-          )}
-          
+          )}          
           {cards}
           <footer className='footer'> &copy; kudosboard.com All rights reserved</footer>
           <KudosCardModal

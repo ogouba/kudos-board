@@ -15,7 +15,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<PageOne />}></Route>
-                <Route path ="/kudoCard/:id" element= {<PageTwo />} />
+                <Route path ="/kudoBoard/:id" element= {<PageTwo />} />
                 {/* <Route path= "/one" element={<PageOne />}></Route>
                 <Route path="/two/:id" element={ <PageTwo />} /> */}
             </Routes>
@@ -33,7 +33,7 @@ export default App;
 // }, []);
 
 // const fetchkudosCards =() =>{
-//     fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard`)
+//     fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard`)
 //     .then(response => {
 //       if (!response.ok) {
 //         throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +50,7 @@ export default App;
 
 // const handleCreateKudoCards = (newKudosBoard) =>{
 //   console.log(newKudosBoard)
-//     fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard`,
+//     fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard`,
 //       {
 //         method: "POST",
 //         headers: {
@@ -73,7 +73,7 @@ export default App;
 //     });
 //   }
 // const handleDeleteKudoCards= async (boardId) =>{
-//     const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard/${boardId}`,
+//     const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard/${boardId}`,
 //     {
 //       method: "DELETE",
 //       headers: {
@@ -94,7 +94,7 @@ export default App;
 
 // const handleSearchKudoCards = async () => {
 //   // console.log(searchQuery)
-//   const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoCard?search=${searchQuery}`)
+//   const response = await fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/kudoBoard?search=${searchQuery}`)
 //   .then(response => {
 //     if (!response.ok) {
 //       throw new Error(`HTTP error! status: ${response.status}`);

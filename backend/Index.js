@@ -7,38 +7,39 @@ const app = express();
 app.use(express.json())
 app.use(cors());
 
-app.get('/kudoCard', async (req, res) =>{
-    const kudoCard = await prisma.kudoBoard.findMany()
-    //res.status(200).json(kudoCard)
+app.get('/kudoBoard', async (req, res) =>{
+    const kudoBoard = await prisma.kudoBoard.findMany()
+    //res.status(200).json(kudoBoard)
 
     const { search } = req.query;
     console.log(search)
     if (search) {
-        const filteredKudoCard = kudoCard.filter(card =>{
+        const filteredKudoBoard = kudoBoard.filter(card =>{
             const searchText = search.toLowerCase();
             const titleMatch = card.title.toLowerCase().includes(searchText);
             const descriptionMatch = card.description.toLowerCase().includes(searchText);
             const authorMatch  = card.author.toLowerCase().includes(searchText);
             return titleMatch || descriptionMatch || authorMatch;
         });
-        res.status(200).json(filteredKudoCard);     
+        res.status(200).json(filteredKudoBoard);     
     }else {
-        res.status(201).json(kudoCard);
+        res.status(201).json(kudoBoard);
     }
 })
 
-app.get('/kudoCard/:id', async (req,res) =>{
+
+app.get('/kudoBoard/:id', async (req,res) =>{
     const {  id  } = req.params
-    const kudocards = await prisma.kudoBoard.findUnique(
+    const kudoBoard = await prisma.kudoBoard.findUnique(
         {
             where: {id:parseInt(id)},
         });
-    res.status(200).json(kudocards);
+    res.status(200).json(kudoBoard);
 
     
 });
 
-app.post('/kudoCard', async (req,res)=>{
+app.post('/kudoBoard', async (req,res)=>{
     const { imageUrl,title, category, description, author } = req.body;
     console.log(imageUrl, title, category, description, author)
     const newKudosBoard = await prisma.kudoBoard.create({
@@ -52,20 +53,72 @@ app.post('/kudoCard', async (req,res)=>{
     })
     res.status(201).json(newKudosBoard);
 })
-
-app.delete('/kudoCard/:id', async (req,res)=>{
+app.delete('/kudoBoard/:id', async (req,res)=>{
     const { id } = req.params;
 
     try{
-        const deleteKudoCards = await prisma.kudoBoard.delete({
+        const deleteKudoBoard = await prisma.kudoBoard.delete({
             where : {id : parseInt(id)}
         })
-        res.status(201).json(deleteKudoCards);
+        res.status(201).json(deleteKudoBoard);
     }catch(error){
         console.log(error);
     }
 
 })
+
+// kudo cards
+app.post('/kudoCard', async (req,res)=>{
+    const { kudoBoardId, title, gifUrl, author } = req.body;
+    console.log( kudoBoardId, title, gifUrl, author)
+    const newKudoCard = await prisma.kudoCard.create({
+        data: {      
+            kudoBoardId,
+            title,
+            gifUrl,
+            author,
+            likes:0
+        }
+    })
+    res.status(201).json(newKudoCard);
+})
+app.get('/kudoBoard/:id/kudoCard', async (req,res) => {
+    const { id } = req.params;
+
+    const kudoCards = await prisma.KudoCard.findMany({where : {kudoBoardId : parseInt(id)}})
+    res.status(200).json(kudoCards)
+});
+
+app.delete('/kudoCard/:id', async (req,res)=>{
+    const { id } = req.params;
+
+    try{
+        const deleteKudoCard = await prisma.kudoCard.delete({
+            where : {id : parseInt(id)}
+        })
+        res.status(201).json(deleteKudoCard);
+    }catch(error){
+        console.log(error);
+    }
+})
+// upvote function
+app.put('/kudoCard/:id', async(req,res)=>{
+    const { kudoBoardId, title, gifUrl, author , likes} = req.body;
+    const { id } = req.params;
+    console.log( kudoBoardId, title, gifUrl, author)
+    const newKudoCard = await prisma.kudoCard.update({
+        where : {id : parseInt(id)},
+        data: {      
+            kudoBoardId,
+            title,
+            gifUrl,
+            author,
+            likes,
+        }
+    })
+    res.status(200).json(newKudoCard);
+})
+
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () =>{
