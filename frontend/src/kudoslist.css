@@ -1,0 +1,9 @@
+.Kudoslist{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5em; 
+    background-color: white;
+    font-family:"Spicy Rice";
+}
