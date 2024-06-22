@@ -1,7 +1,7 @@
-import './kudoscard.css';
+import './KudosBoard.css';
 import { Link }from "react-router-dom";
 
-function KudosCard({title, category, image, description, author, onDelete, id}) {
+function KudosBoard({title, category, image, description, author, onDelete, id}) {
 // const Kudoscard = ()
     return(
         <>
@@ -11,7 +11,6 @@ function KudosCard({title, category, image, description, author, onDelete, id}) 
                 <h3 className= "kudosCardCategory">category: {category}</h3>
                 <h3 className= "kudosCardDescription">description:{description}</h3>            
                 <h3 className= "kudosCardAuthor">author:{author}</h3>
-                {/* <button className='KudosCardButtonView'< >View Board </button> */}
                 <Link to={`/kudoBoard/${id}`}> View Board</Link>
                 <button className='KudosCardButtonCreate' onClick={onDelete} > Delete Board </button>
             </div>
@@ -19,4 +18,4 @@ function KudosCard({title, category, image, description, author, onDelete, id}) 
     )
 }
 
-export default KudosCard
+export default KudosBoard

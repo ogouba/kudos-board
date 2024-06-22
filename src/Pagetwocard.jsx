@@ -1,6 +1,6 @@
-import propTypes from "prop-types";
+import { useState } from "react";
 
-function PagetwoCard(props) {
+function PagetwoCard({title, id, image, author,likes, handleUpvoteKudoCard,handleDeleteKudoCard }) {
     return (
         <>
             <div className="card border-success mb-3" style={{maxWidth: "18rem"}}>
@@ -9,18 +9,16 @@ function PagetwoCard(props) {
                 </div>
                 <div className="card-body text-success">
                     <h5 className="card-title">Success card title</h5>
-                    <img src="https://picsum.photos/200/300" />
-                    <p className="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                    </p>
-                    <div> {props.title}</div>
-                    <div> {props.author}</div>
+                    <img src = {image}/>
+                    <div> {title}</div>
+                    <div> {author}</div>
                 </div>
                 <div className="card-footer bg-transparent border-success">
                     Footer
-                    <button> delete </button>
-                    <button> upvote</button>
+                    <button onClick={(event) => {handleDeleteKudoCard(id)}}> delete </button>
+                    <div> 
+                        <button onClick={(event) => {handleUpvoteKudoCard(id)}}> Upvote </button>{likes}
+                    </div>
                 </div>
             </div>
         </>

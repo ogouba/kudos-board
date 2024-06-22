@@ -1,7 +1,6 @@
 
 import { useState } from 'react'
-
-function KudosCardModal({handleCreateKudoCards}){
+function KudosBoardModal({handleCreateKudoBoard}){
 
     const [author, setAuthor] = useState("")
     const [imageUrl, setImageUrl] = useState("")
@@ -10,7 +9,7 @@ function KudosCardModal({handleCreateKudoCards}){
     const [description, setDescription] = useState("")
     
     const handleCreateButton = (event) => {
-        handleCreateKudoCards({author: author, imageUrl:imageUrl, category: category, title:title, description: description})
+        handleCreateKudoBoard({author: author, imageUrl:imageUrl, category: category, title:title, description: description})
     }
     return(
         <>
@@ -61,4 +60,4 @@ function KudosCardModal({handleCreateKudoCards}){
     
     )   
 }
-export default KudosCardModal
+export default KudosBoardModal
