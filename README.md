@@ -58,7 +58,7 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-
+https://www.loom.com/share/d0a8b8b65e5f4f1db1dc672f2194f7fd?sid=ead3afaf-86dd-4c13-a75d-c59b931c1e08 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
