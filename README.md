@@ -58,7 +58,8 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-https://www.loom.com/share/d0a8b8b65e5f4f1db1dc672f2194f7fd?sid=ead3afaf-86dd-4c13-a75d-c59b931c1e08 
+https://www.loom.com/share/d0a8b8b65e5f4f1db1dc672f2194f7fd?sid=ead3afaf-86dd-4c13-a75d-c59b931c1e08  + 
+Video that highlights the search functionality and delete function that wasn't obvious in the previuos video: https://www.loom.com/share/6fe597296d834ef6ad93e3ae0d2120cd?sid=dfaac259-0170-49d8-98e8-9ab1a681f6e2
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
